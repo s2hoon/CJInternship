@@ -1,16 +1,17 @@
 package com.cj.cjone.user.utils;
 
-import com.cj.cjone.user.User;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import com.cj.cjone.user.User;
+
+import io.jsonwebtoken.Jwts;
 
 @Component
 public class JwtUtil {
@@ -19,9 +20,6 @@ public class JwtUtil {
 
     @Value("${jwt.access-token-expiration}")
     private Long accessExpiration;
-
-//    @Value("${jwt.refresh-token-expiration}")
-//    private Long refreshExpiration;
 
     public JwtUtil(@Value("${jwt.secret}") String secret) {
         this.secretKey = new SecretKeySpec(secret.getBytes(StandardCharsets.UTF_8),
@@ -35,31 +33,6 @@ public class JwtUtil {
                 .expiration(new Date(System.currentTimeMillis() + accessExpiration))
                 .signWith(secretKey)
                 .compact();
-    }
-
-//    public String createRefreshToken(User user) {
-//        return Jwts.builder()
-//                .claim("username", user.getUsername())
-//                .expiration(new Date(System.currentTimeMillis() + refreshExpiration))
-//                .signWith(secretKey)
-//                .compact();
-//    }
-
-    public boolean isValidRefreshToken(String refreshToken) {
-        try {
-            getClaimsToken(refreshToken);
-            return true;
-        } catch (NullPointerException | JwtException e) {
-            return false;
-        }
-    }
-
-    private Claims getClaimsToken(String token) {
-        return Jwts.parser()
-                .verifyWith(secretKey)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
     }
 
 }
