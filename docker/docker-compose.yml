@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: "mysql:8.0.33"
+    container_name: docker_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cj
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./mysql:/etc/mysql/conf.d  # MySQL 설정 파일 적용
+
+  redis:
+    image: "redis:latest"
+    container_name: docker_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
