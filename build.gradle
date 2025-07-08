@@ -33,17 +33,31 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
-
+    // REDIS
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // MYSQL
+    implementation("mysql:mysql-connector-java:8.0.33")
+    // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    // lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+    // bcrypt
+    implementation 'at.favre.lib:bcrypt:0.9.0'
+
+    // docker compose
+    developmentOnly("org.springframework.boot:spring-boot-docker-compose")
+    testAndDevelopmentOnly("org.springframework.boot:spring-boot-docker-compose")
+
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
 
     //Feign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 
     //MySQL
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
