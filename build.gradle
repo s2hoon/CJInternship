@@ -9,7 +9,7 @@ version = '0.0.1-SNAPSHOT'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion = JavaLanguageVersion.of(24)
     }
 }
 
@@ -19,7 +19,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        // 사용 중인 Spring Boot 버전에 맞는 Spring Cloud 버전을 선택하세요.
+        // 사용 중인 Spring Boot 버전에 맞는 Spring Cloud 버전을 선택
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.2"
     }
 }
