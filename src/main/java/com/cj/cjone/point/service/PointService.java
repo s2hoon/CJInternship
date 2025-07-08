@@ -1,7 +1,6 @@
 package com.cj.cjone.point.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cj.cjone.point.dto.PointDto;
 import com.cj.cjone.point.entity.Point;
@@ -16,11 +15,11 @@ public class PointService {
 	private final PointRepository pointRepository;
 	private final UserServiceClient userClient;
 
-	@Transactional
+
 	public PointDto.Response increasePoint(PointDto.Request request) {
 		// 1. 사용자 서비스에 유저가 실존하는지 확인 (by Feign)
 		//    -> 사용자가 없으면 Feign이 Exception을 발생시켜 여기서 중단됨
-		userClient.checkUserExists(request.getUserId());
+		// userClient.checkUserExists(request.getUserId());
 
 		// 2. 포인트 DB에서 사용자 포인트를 조회하거나, 없으면 새로 생성
 		Point point = pointRepository.findByUserId(request.getUserId())
@@ -34,10 +33,10 @@ public class PointService {
 		return new PointDto.Response(savedPoint.getUserId(), savedPoint.getBalance());
 	}
 
-	@Transactional
+
 	public PointDto.Response decreasePoint(PointDto.Request request) {
 		// 1. 사용자 확인
-		userClient.checkUserExists(request.getUserId());
+		// userClient.checkUserExists(request.getUserId());
 
 		// 2. 포인트 조회 (포인트 정보가 없으면 에러)
 		Point point = pointRepository.findByUserId(request.getUserId())
