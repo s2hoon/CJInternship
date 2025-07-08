@@ -45,6 +45,10 @@ dependencies {
     //Feign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
+    //MySQL
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
 }
 
 tasks.named('test') {
