@@ -27,7 +27,7 @@ public class Point {
 
 	// 비즈니스 로직: 포인트 증가
 	public void increase(int amount) {
-		if (amount <= 0) {
+		if (amount < 0) {
 			throw new IllegalArgumentException("포인트는 0보다 커야 합니다.");
 		}
 		this.balance += amount;
