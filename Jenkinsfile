@@ -24,7 +24,10 @@ pipeline {
         stage('Build App') {
             steps {
                 echo "🛠 애플리케이션 빌드"
-                sh './gradlew build' // 필요 시 수정
+                sh '''
+                    chmod +x gradlew
+                    ./gradlew build
+                '''
             }
         }
 
