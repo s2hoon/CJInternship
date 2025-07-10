@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: cj-app
-          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:latest
+          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
           ports:
             - containerPort: 8080
       imagePullSecrets:

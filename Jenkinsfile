@@ -9,7 +9,7 @@ pipeline {
         AWS_ACCOUNT_ID = '051826731133'
         AWS_REGION = 'ap-northeast-2'
         REPOSITORY_NAME = 'cj-ecr'
-        IMAGE_TAG = "${params.DEPLOY_ENV}-${env.BUILD_NUMBER}"
+        IMAGE_TAG = "${params.DEPLOY_ENV}"
         FULL_IMAGE_NAME = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPOSITORY_NAME}:${IMAGE_TAG}"
     }
 
