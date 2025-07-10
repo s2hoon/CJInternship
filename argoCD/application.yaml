@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cj-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/s2hoon/CJInternship.git'  # 👈 Git 리포 주소
+    targetRevision: HEAD
+    path: argoCD    # 👈 deployment.yaml, service.yaml 있는 경로
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

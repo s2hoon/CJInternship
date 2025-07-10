@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cj-app
+  labels:
+    app: cj-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cj-app
+  template:
+    metadata:
+      labels:
+        app: cj-app
+    spec:
+      containers:
+        - name: cj-app
+          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:latest
+          ports:
+            - containerPort: 8080
+      imagePullSecrets:
+        - name: ecr-creds
