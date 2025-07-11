@@ -8,10 +8,10 @@ spring:
       file: ./docker/docker-compose.yml
       lifecycle-management: start-only
   datasource:
-    url: jdbc:mysql://localhost:3306/cj
-    username: root
-    password: root
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
   data:
     redis:
-      host: localhost
+      host: ${SPRING_DATA_REDIS_HOST}
       port: 6379
