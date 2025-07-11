@@ -36,10 +36,3 @@ out/
 ### VS Code ###
 .vscode/
 
-
-### prod ###
-application-prod.yml
-### dev ###
-application-dev.yml
-### stage ###
-application-stage.yml
