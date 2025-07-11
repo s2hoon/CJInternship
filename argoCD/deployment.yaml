@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cj-app
+  namespace: default  # ✅ 네임스페이스 명시 (반드시 Secret과 동일하게)
   labels:
     app: cj-app
 spec:
@@ -19,8 +20,8 @@ spec:
           image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
           ports:
             - containerPort: 8080
-          envFrom:  # ✅ 반드시 containers 내부!
+          envFrom:  # ✅ Secret 환경변수 불러오기
             - secretRef:
-                name: db-redis-secret
+                name: db-redis-secret  # 반드시 default 네임스페이스의 Secret
       imagePullSecrets:
-        - name: ecr-creds
+        - name: ecr-creds  # ECR 인증
