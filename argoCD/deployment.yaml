@@ -21,3 +21,7 @@ spec:
             - containerPort: 8080
       imagePullSecrets:
         - name: ecr-creds
+      # ✅ 여기 추가!
+      envFrom:
+        - secretRef:
+            name: db-redis-secret
