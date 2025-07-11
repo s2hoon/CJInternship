@@ -8,7 +8,7 @@ spring:
       file: ./docker/docker-compose.yml
       lifecycle-management: start-only
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
+    url: jdbc:mysql://cj-dev-mysql.c5syk8q4mlad.ap-northeast-2.rds.amazonaws.com:3306/cj
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   data:
