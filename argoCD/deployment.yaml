@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cj-app
+  namespace: default  # ✅ 네임스페이스 명시 (Secret과 동일하게)
   labels:
     app: cj-app
 spec:
@@ -19,5 +20,27 @@ spec:
           image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
           ports:
             - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: db-redis-secret
+                  key: SPRING_DATASOURCE_URL
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-redis-secret
+                  key: SPRING_DATASOURCE_USERNAME
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-redis-secret
+                  key: SPRING_DATASOURCE_PASSWORD
+            - name: SPRING_DATA_REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: db-redis-secret
+                  key: SPRING_DATA_REDIS_HOST
+          args: ["sleep", "infinity"]  # ✅ 디버깅용 (컨테이너 안죽게 유지)
       imagePullSecrets:
-        - name: ecr-creds
+        - name: ecr-creds  # ECR 인증
