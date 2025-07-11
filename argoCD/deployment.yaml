@@ -19,9 +19,8 @@ spec:
           image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
           ports:
             - containerPort: 8080
+          envFrom:  # ✅ 반드시 containers 내부!
+            - secretRef:
+                name: db-redis-secret
       imagePullSecrets:
         - name: ecr-creds
-      # ✅ 여기 추가!
-      envFrom:
-        - secretRef:
-            name: db-redis-secret
