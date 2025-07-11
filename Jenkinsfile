@@ -52,6 +52,14 @@ pipeline {
                 }
             }
         }
+        stage('Clean up Docker Images') {
+              steps {
+                     echo "🧹 Docker 이미지 정리"
+                        sh '''
+                            docker rmi ${REPOSITORY_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME} || true
+                        '''
+              }
+        }
     }
 
     post {
