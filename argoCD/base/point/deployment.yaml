@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: point-service
+  namespace: default
+  labels:
+    app: point-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: point-service
+  template:
+    metadata:
+      labels:
+        app: point-service
+    spec:
+      containers:
+        - name: point-service
+          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: db-redis-secret
+      imagePullSecrets:
+        - name: ecr-creds

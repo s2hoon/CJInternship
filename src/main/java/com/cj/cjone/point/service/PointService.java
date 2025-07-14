@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 public class PointService {
 
 	private final PointRepository pointRepository;
-	private final UserServiceClient userClient;
+
 
 
 	public PointDto.Response increasePoint(PointDto.Request request) {

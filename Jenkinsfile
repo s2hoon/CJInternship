@@ -5,10 +5,11 @@ pipeline {
         AWS_ACCOUNT_ID = '051826731133'
         AWS_REGION = 'ap-northeast-2'
         REPOSITORY_NAME = 'cj-ecr'
-        DEPLOY_ENV = 'dev'  // 고정값
-        IMAGE_TAG = "${DEPLOY_ENV}"
+        GIT_COMMIT = "${env.GIT_COMMIT}"
+        IMAGE_TAG = "${GIT_COMMIT}"
         FULL_IMAGE_NAME = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPOSITORY_NAME}:${IMAGE_TAG}"
     }
+
 
     stages {
         stage('Checkout') {
@@ -32,7 +33,7 @@ pipeline {
             steps {
                 echo "🐳 Docker 이미지 빌드 및 태깅"
                 sh """
-                    docker build -t ${REPOSITORY_NAME}:${IMAGE_TAG} .
+                    docker build --no-cache -t ${REPOSITORY_NAME}:${IMAGE_TAG} .
                     docker tag ${REPOSITORY_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}
                 """
             }

@@ -12,7 +12,7 @@ import com.cj.cjone.point.service.PointService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/points")
+@RequestMapping("/point")
 @RequiredArgsConstructor
 public class PointController {
 
