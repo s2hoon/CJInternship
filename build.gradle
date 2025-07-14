@@ -17,12 +17,12 @@ repositories {
     mavenCentral()
 }
 
-dependencyManagement {
-    imports {
-        // 사용 중인 Spring Boot 버전에 맞는 Spring Cloud 버전을 선택
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.2"
-    }
-}
+//dependencyManagement {
+////    imports {
+////        // 사용 중인 Spring Boot 버전에 맞는 Spring Cloud 버전을 선택
+////        mavenBom "org.springframework.cloud:spring-cloud-dependencies:2023.0.2"
+////    }
+//}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -39,8 +39,8 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.33")
     // JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    // spring Cloud
-    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+//    // spring Cloud
+//    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     // lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -56,9 +56,9 @@ dependencies {
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
 
-    //Feign
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+//    //Feign
+//    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 
     //MySQL
 //    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
