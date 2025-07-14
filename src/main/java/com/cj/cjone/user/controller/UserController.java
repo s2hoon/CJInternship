@@ -2,11 +2,14 @@ package com.cj.cjone.user.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cj.cjone.user.dto.MyPageResponse;
 import com.cj.cjone.user.dto.SignInRequest;
 import com.cj.cjone.user.dto.SignUpRequest;
 import com.cj.cjone.user.dto.TokenResponse;
@@ -32,5 +35,10 @@ public class UserController {
     @PostMapping("/signIn")
     public ResponseEntity<TokenResponse> signIn(@RequestBody SignInRequest request) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.signIn(request));
+    }
+
+    @GetMapping("/mypage")
+    public ResponseEntity<MyPageResponse> getMyPage(@RequestParam Long userId) {
+        return ResponseEntity.ok(userService.getMyPage(userId));
     }
 }

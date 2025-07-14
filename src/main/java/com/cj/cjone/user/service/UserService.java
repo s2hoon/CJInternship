@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.cj.cjone.point.entity.Point;
+import com.cj.cjone.point.repository.PointRepository;
 import com.cj.cjone.user.User;
+import com.cj.cjone.user.dto.MyPageResponse;
 import com.cj.cjone.user.dto.SignInRequest;
 import com.cj.cjone.user.dto.SignUpRequest;
 import com.cj.cjone.user.dto.TokenResponse;
@@ -23,6 +26,7 @@ public class UserService {
 
     private final JwtUtil jwtUtil;
     private final UserRepository userRepository;
+    private final PointRepository pointRepository;
     private final StringRedisTemplate redisTemplate;
 
     private static final Duration TOKEN_EXPIRE_TIME = Duration.ofHours(3); // 토큰 만료 시간 예시
@@ -68,6 +72,24 @@ public class UserService {
 
         return TokenResponse.builder()
             .accessToken(accessToken)
+            .build();
+    }
+
+    public MyPageResponse getMyPage(Long userId) {
+        User user = userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        int balance = pointRepository.findByUserId(userId)
+            .map(Point::getBalance)
+            .orElse(0); // 사용자가 포인트가 없을 수도 있음
+
+        return MyPageResponse.builder()
+            .userId(user.getId())
+            .username(user.getUsername())
+            .email(user.getEmail())
+            .nickname(user.getNickname())
+            .age(user.getAge())
+            .pointBalance(balance) // ✅ 포인트 포함
             .build();
     }
 
