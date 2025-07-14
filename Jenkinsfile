@@ -1,15 +1,12 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(name: 'DEPLOY_ENV', choices: ['dev', 'stage', 'prod'], description: '배포 환경 선택')
-    }
-
     environment {
         AWS_ACCOUNT_ID = '051826731133'
         AWS_REGION = 'ap-northeast-2'
         REPOSITORY_NAME = 'cj-ecr'
-        IMAGE_TAG = "${params.DEPLOY_ENV}"
+        DEPLOY_ENV = 'dev'  // 고정값
+        IMAGE_TAG = "${DEPLOY_ENV}"
         FULL_IMAGE_NAME = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPOSITORY_NAME}:${IMAGE_TAG}"
     }
 
@@ -43,7 +40,7 @@ pipeline {
 
         stage('Push to ECR') {
             steps {
-                  withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-ecr-credentials']]) {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'aws-ecr-credentials']]) {
                     sh '''
                         aws ecr get-login-password --region $AWS_REGION | \
                         docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
@@ -52,19 +49,20 @@ pipeline {
                 }
             }
         }
+
         stage('Clean up Docker Images') {
-              steps {
-                     echo "🧹 Docker 이미지 정리"
-                        sh '''
-                            docker rmi ${REPOSITORY_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME} || true
-                        '''
-              }
+            steps {
+                echo "🧹 Docker 이미지 정리"
+                sh '''
+                    docker rmi ${REPOSITORY_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME} || true
+                '''
+            }
         }
     }
 
     post {
         success {
-            echo "✅ [${params.DEPLOY_ENV}] ECR 이미지 푸시 성공: ${FULL_IMAGE_NAME}"
+            echo "✅ ECR 이미지 푸시 성공: ${FULL_IMAGE_NAME}"
         }
         failure {
             echo "❌ ECR 푸시 실패"
