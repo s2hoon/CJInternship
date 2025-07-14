@@ -25,87 +25,87 @@ spec:
                 name: db-redis-secret
       imagePullSecrets:
         - name: ecr-creds
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: user-service
-  namespace: default
-  labels:
-    app: user-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: user-service
-  template:
-    metadata:
-      labels:
-        app: user-service
-    spec:
-      containers:
-        - name: user-service
-          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
-          ports:
-            - containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: db-redis-secret
-      imagePullSecrets:
-        - name: ecr-creds
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: point-service
-  namespace: default
-  labels:
-    app: point-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: point-service
-  template:
-    metadata:
-      labels:
-        app: point-service
-    spec:
-      containers:
-        - name: point-service
-          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
-          ports:
-            - containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: db-redis-secret
-      imagePullSecrets:
-        - name: ecr-creds
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: product-service
-  namespace: default
-  labels:
-    app: product-service
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: product-service
-  template:
-    metadata:
-      labels:
-        app: product-service
-    spec:
-      containers:
-        - name: product-service
-          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
-          ports:
-            - containerPort: 8080
-          envFrom:
-            - secretRef:
-                name: db-redis-secret
-      imagePullSecrets:
-        - name: ecr-creds
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: user-service
+#  namespace: default
+#  labels:
+#    app: user-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: user-service
+#  template:
+#    metadata:
+#      labels:
+#        app: user-service
+#    spec:
+#      containers:
+#        - name: user-service
+#          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
+#          ports:
+#            - containerPort: 8080
+#          envFrom:
+#            - secretRef:
+#                name: db-redis-secret
+#      imagePullSecrets:
+#        - name: ecr-creds
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: point-service
+#  namespace: default
+#  labels:
+#    app: point-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: point-service
+#  template:
+#    metadata:
+#      labels:
+#        app: point-service
+#    spec:
+#      containers:
+#        - name: point-service
+#          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
+#          ports:
+#            - containerPort: 8080
+#          envFrom:
+#            - secretRef:
+#                name: db-redis-secret
+#      imagePullSecrets:
+#        - name: ecr-creds
+#---
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: product-service
+#  namespace: default
+#  labels:
+#    app: product-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: product-service
+#  template:
+#    metadata:
+#      labels:
+#        app: product-service
+#    spec:
+#      containers:
+#        - name: product-service
+#          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
+#          ports:
+#            - containerPort: 8080
+#          envFrom:
+#            - secretRef:
+#                name: db-redis-secret
+#      imagePullSecrets:
+#        - name: ecr-creds
