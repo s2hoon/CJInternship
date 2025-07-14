@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo "🐳 Docker 이미지 빌드 및 태깅"
                 sh """
-                    docker build -t ${REPOSITORY_NAME}:${IMAGE_TAG} .
+                    docker build --no-cache -t ${REPOSITORY_NAME}:${IMAGE_TAG} .
                     docker tag ${REPOSITORY_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}
                 """
             }
