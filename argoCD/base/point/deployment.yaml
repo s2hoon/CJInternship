@@ -1,10 +1,3 @@
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: point-service
-  namespace: default
-  labels:
-    app: point-service
 spec:
   replicas: 1
   selector:
@@ -18,11 +11,13 @@ spec:
       containers:
         - name: point-service
           image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
-          imagePullPolicy: Always  # <-- 여기에 추가!
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           envFrom:
             - secretRef:
                 name: db-redis-secret
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: point-node-group  # 🔥 여기가 핵심
       imagePullSecrets:
         - name: ecr-creds
