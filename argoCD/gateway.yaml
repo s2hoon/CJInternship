@@ -1,15 +1,15 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: cj-app-gateway
-  namespace: default  # 네 서비스가 있는 네임스페이스
+  name: main-gateway
+  namespace: default
 spec:
   selector:
-    istio: ingressgateway  # Istio Ingress Gateway에 연결
+    istio: ingressgateway
   servers:
     - port:
         number: 80
         name: http
         protocol: HTTP
       hosts:
-        - "aac388af20c9f4e36b544924dc9a6d71-138808423.ap-northeast-2.elb.amazonaws.com"  # Istio ELB 도메인
+        - "*"

@@ -1,19 +1,43 @@
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: cj-app-virtualservice
+  name: multi-service-router
   namespace: default
 spec:
   hosts:
-    - "aac388af20c9f4e36b544924dc9a6d71-138808423.ap-northeast-2.elb.amazonaws.com"
+    - "*"
   gateways:
-    - cj-app-gateway
+    - main-gateway
   http:
     - match:
         - uri:
-            prefix: /
+            prefix: /user
       route:
         - destination:
-            host: cj-app-service.default.svc.cluster.local  # 서비스 이름 (Namespace 포함)
+            host: user-service
             port:
-              number: 80
+              number: 8080
+    - match:
+        - uri:
+            prefix: /point
+      route:
+        - destination:
+            host: point-service
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /product
+      route:
+        - destination:
+            host: product-service
+            port:
+              number: 8080
+    - match:
+        - uri:
+            prefix: /app
+      route:
+        - destination:
+            host: cj-app-service
+            port:
+              number: 8080
