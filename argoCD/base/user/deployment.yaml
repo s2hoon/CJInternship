@@ -18,6 +18,7 @@ spec:
       containers:
         - name: user-service
           image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-ecr:dev
+          imagePullPolicy: Always  # <-- 여기에 추가!
           ports:
             - containerPort: 8080
           envFrom:

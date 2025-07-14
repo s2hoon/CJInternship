@@ -5,8 +5,8 @@ pipeline {
         AWS_ACCOUNT_ID = '051826731133'
         AWS_REGION = 'ap-northeast-2'
         REPOSITORY_NAME = 'cj-ecr'
-        GIT_COMMIT = "${env.GIT_COMMIT}"
-        IMAGE_TAG = "${GIT_COMMIT}"
+        DEPLOY_ENV = 'dev'  // 고정값
+        IMAGE_TAG = "${DEPLOY_ENV}"
         FULL_IMAGE_NAME = "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${REPOSITORY_NAME}:${IMAGE_TAG}"
     }
 
