@@ -23,7 +23,6 @@ spec:
           envFrom:
             - secretRef:
                 name: db-redis-secret
-          args: ["sleep", "infinity"]
       imagePullSecrets:
         - name: ecr-creds
 ---
@@ -52,7 +51,6 @@ spec:
           envFrom:
             - secretRef:
                 name: db-redis-secret
-          args: ["sleep", "infinity"]
       imagePullSecrets:
         - name: ecr-creds
 ---
@@ -81,7 +79,6 @@ spec:
           envFrom:
             - secretRef:
                 name: db-redis-secret
-          args: ["sleep", "infinity"]
       imagePullSecrets:
         - name: ecr-creds
 ---
@@ -110,6 +107,5 @@ spec:
           envFrom:
             - secretRef:
                 name: db-redis-secret
-          args: ["sleep", "infinity"]
       imagePullSecrets:
         - name: ecr-creds
