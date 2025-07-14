@@ -1,3 +1,10 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: point-service
+  namespace: default
+  labels:
+    app: point-service
 spec:
   replicas: 1
   selector:
@@ -18,6 +25,6 @@ spec:
             - secretRef:
                 name: db-redis-secret
       nodeSelector:
-        eks.amazonaws.com/nodegroup: point-node-group  # 🔥 여기가 핵심
+        eks.amazonaws.com/nodegroup: point-node-group
       imagePullSecrets:
         - name: ecr-creds
