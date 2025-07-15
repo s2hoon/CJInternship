@@ -1,10 +1,7 @@
 package com.cj.cjone.point.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.cj.cjone.point.dto.PointDto;
 import com.cj.cjone.point.service.PointService;
@@ -31,4 +28,14 @@ public class PointController {
 		PointDto.Response response = pointService.decreasePoint(request);
 		return ResponseEntity.ok(response);
 	}
+
+	// 포인트 조회 API
+	@GetMapping
+	public ResponseEntity<PointDto.Response> getPoint(@RequestParam String username) {
+		PointDto.Response response = pointService.getPointByUsername(username);
+		return ResponseEntity.ok(response);
+	}
+
+
+
 }

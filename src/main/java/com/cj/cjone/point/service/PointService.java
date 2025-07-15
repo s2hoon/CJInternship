@@ -23,7 +23,7 @@ public class PointService {
 
 		// 2. 포인트 DB에서 사용자 포인트를 조회하거나, 없으면 새로 생성
 		Point point = pointRepository.findByUserId(request.getUserId())
-			.orElseGet(() -> new Point(request.getUserId()));
+				.orElseGet(() -> new Point(request.getUserId(), request.getUsername()));
 
 		// 3. 포인트 증가 로직
 		point.increase(request.getAmount());
@@ -49,4 +49,13 @@ public class PointService {
 
 		return new PointDto.Response(savedPoint.getUserId(), savedPoint.getBalance());
 	}
+
+	public PointDto.Response getPointByUsername(String username) {
+		System.out.println(username);
+		Point point = pointRepository.findByUsername(username)
+				.orElseThrow(() -> new RuntimeException("해당 유저를 찾을 수 없습니다."));
+
+		return new PointDto.Response(point.getUserId(), point.getBalance());
+	}
+
 }

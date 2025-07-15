@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface PointRepository extends JpaRepository<Point, Long> {
 	// 사용자 ID로 포인트 정보를 조회
 	Optional<Point> findByUserId(Long userId);
+	Optional<Point> findByUsername(String username);
 }

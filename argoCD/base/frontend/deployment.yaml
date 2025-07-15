@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: default
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: 051826731133.dkr.ecr.ap-northeast-2.amazonaws.com/cj-dev-frontend:dev
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_URL
+              value: "https://a4c0289e336ab45d1a139236b60511a3-55573628.ap-northeast-2.elb.amazonaws.com/point-service"
+      imagePullSecrets:
+        - name: ecr-creds

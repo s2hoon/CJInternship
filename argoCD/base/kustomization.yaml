@@ -5,3 +5,4 @@ resources:
   - user/
   - point/
   - product/
+  - frontend/

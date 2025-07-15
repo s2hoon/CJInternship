@@ -11,6 +11,7 @@ public class PointDto {
 	public static class Request {
 		private Long userId; // 포인트를 변경할 사용자 ID
 		private int amount;  // 변경할 포인트 양
+		private String username;
 	}
 
 	// 응답 시 사용할 DTO
