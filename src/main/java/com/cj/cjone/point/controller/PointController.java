@@ -30,7 +30,7 @@ public class PointController {
 	}
 
 	// 포인트 조회 API
-	@GetMapping
+	@GetMapping("/mypage")
 	public ResponseEntity<PointDto.Response> getPoint(@RequestParam String username) {
 		PointDto.Response response = pointService.getPointByUsername(username);
 		return ResponseEntity.ok(response);
