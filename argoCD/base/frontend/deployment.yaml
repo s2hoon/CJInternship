@@ -24,5 +24,7 @@ spec:
           env:
             - name: REACT_APP_API_URL
               value: "https://a4c0289e336ab45d1a139236b60511a3-55573628.ap-northeast-2.elb.amazonaws.com/frontend-service"
+      nodeSelector:
+        eks.amazonaws.com/nodegroup: frontend-node-group  # 🔥 여기가 핵심
       imagePullSecrets:
         - name: ecr-creds
