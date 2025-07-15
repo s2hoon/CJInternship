@@ -18,8 +18,6 @@ public class Point {
 	@Column(unique = true, nullable = false)
 	private Long userId; // 사용자 ID
 
-	@Column(nullable = false, unique = true)
-	private String username; // 🔥 사용자 이름 (로그인 ID)
 
 	private int balance; // 포인트 잔액
 
@@ -28,11 +26,6 @@ public class Point {
 		this.balance = 0; // 초반 포인트 금액
 	}
 
-	public Point(Long userId, String username) {
-		this.userId =userId;
-		this.balance = 0;
-		this.username = username;
-	}
 
 	// 비즈니스 로직: 포인트 증가
 	public void increase(int amount) {

@@ -1,7 +1,7 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
   docker:
     compose:
       enabled: false
@@ -22,3 +22,6 @@ springdoc:
     config-url: /v3/api-docs/swagger-config  # ✅ 이게 핵심
   api-docs:
     path: /v3/api-docs
+logging:
+  level:
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG

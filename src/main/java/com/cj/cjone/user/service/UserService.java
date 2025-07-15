@@ -64,16 +64,20 @@ public class UserService {
     public TokenResponse signIn(SignInRequest request) {
         User user = userRepository.findByUsername(request.username())
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
         if (!verifyPassword(request.password(), user.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
+
         String accessToken = jwtUtil.createAccessToken(user);
         redisTemplate.opsForValue().set("accessToken:" + user.getUsername(), accessToken, TOKEN_EXPIRE_TIME);
 
         return TokenResponse.builder()
             .accessToken(accessToken)
+            .userId(user.getId())  // 🔥 userId 추가
             .build();
     }
+
 
     public MyPageResponse getMyPage(Long userId) {
         User user = userRepository.findById(userId)

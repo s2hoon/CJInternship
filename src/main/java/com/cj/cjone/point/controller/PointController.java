@@ -30,11 +30,12 @@ public class PointController {
 	}
 
 	// 포인트 조회 API
-	@GetMapping("/mypage")
-	public ResponseEntity<PointDto.Response> getPoint(@RequestParam String username) {
-		PointDto.Response response = pointService.getPointByUsername(username);
+	@GetMapping
+	public ResponseEntity<PointDto.Response> getPoint(@RequestParam Long userId) {
+		PointDto.Response response = pointService.getPointByUserId(userId);  // ✅ 메서드명도 변경
 		return ResponseEntity.ok(response);
 	}
+
 
 
 
